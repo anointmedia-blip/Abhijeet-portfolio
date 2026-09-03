@@ -201,6 +201,7 @@ const Work = () => {
                   <WorkImage
                     image={project.image}
                     alt={project.title}
+                    video={hasVideos ? project.gallery.find((g) => g.type === "video")?.src : undefined}
                     galleryCount={project.gallery.length}
                     hasVideos={hasVideos}
                     onClick={() => setActiveProject(project)}

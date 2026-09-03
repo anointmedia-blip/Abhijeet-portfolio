@@ -45,8 +45,16 @@ const WorkImage = (props: Props) => {
           )}
         </div>
 
-        <img src={props.image} alt={props.alt} loading="lazy" />
-        {isVideo && <video src={video} autoPlay muted playsInline loop></video>}
+        <img src={encodeURI(props.image)} alt={props.alt} loading="lazy" />
+        {isVideo && video && (
+          <video
+            src={encodeURI(video)}
+            autoPlay
+            muted
+            playsInline
+            loop
+          />
+        )}
       </div>
     </div>
   );

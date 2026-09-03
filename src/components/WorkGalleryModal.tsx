@@ -155,19 +155,21 @@ const WorkGalleryModal: React.FC<WorkGalleryModalProps> = ({
                 {currentItem.type === "video" ? (
                   <div className="gallery-video-holder">
                     <video
-                      key={currentItem.src}
+                      key={encodeURI(currentItem.src)}
                       ref={videoRef}
-                      src={currentItem.src}
                       controls
                       autoPlay
                       playsInline
                       className="gallery-main-video"
-                    />
+                    >
+                      <source src={encodeURI(currentItem.src)} type="video/mp4" />
+                      Your browser does not support HTML5 video.
+                    </video>
                   </div>
                 ) : (
                   <div className="gallery-image-holder">
                     <img
-                      src={currentItem.src}
+                      src={encodeURI(currentItem.src)}
                       alt={currentItem.title || project.title}
                       className="gallery-main-image"
                     />
@@ -206,10 +208,15 @@ const WorkGalleryModal: React.FC<WorkGalleryModalProps> = ({
                     {item.type === "video" ? (
                       <div className="gallery-thumb-video-icon">
                         <MdPlayCircleFilled />
-                        <video src={item.src} muted preload="metadata" />
+                        <video
+                          src={encodeURI(item.src)}
+                          muted
+                          preload="none"
+                          poster={encodeURI(project.image)}
+                        />
                       </div>
                     ) : (
-                      <img src={item.src} alt={`Thumbnail ${idx + 1}`} />
+                      <img src={encodeURI(item.src)} alt={`Thumbnail ${idx + 1}`} loading="lazy" />
                     )}
                     <span className="gallery-thumb-index">{idx + 1}</span>
                   </div>
@@ -233,13 +240,18 @@ const WorkGalleryModal: React.FC<WorkGalleryModalProps> = ({
                 >
                   {item.type === "video" ? (
                     <div className="gallery-grid-video-wrap">
-                      <video src={item.src} muted preload="metadata" />
+                      <video
+                        src={encodeURI(item.src)}
+                        muted
+                        preload="none"
+                        poster={encodeURI(project.image)}
+                      />
                       <div className="gallery-grid-play-badge">
                         <MdPlayCircleFilled /> Video
                       </div>
                     </div>
                   ) : (
-                    <img src={item.src} alt={`Gallery item ${idx + 1}`} loading="lazy" />
+                    <img src={encodeURI(item.src)} alt={`Gallery item ${idx + 1}`} loading="lazy" />
                   )}
                   <div className="gallery-grid-overlay">
                     <span className="gallery-grid-number">#{idx + 1}</span>
