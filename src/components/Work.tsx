@@ -100,7 +100,7 @@ const projects: ProjectData[] = [
       { type: "image", src: "/images/wrap (14).jpg", title: "Product Wrap Design #14" },
       { type: "image", src: "/images/wrap (15).jpg", title: "Product Wrap Design #15" },
       { type: "image", src: "/images/wrap (16).jpg", title: "Product Wrap Design #16" },
-      { type: "image", src: "/images/wrap (17).jpg", title: "Product Wrap Design #17" },
+      { type: "video", src: "/images/wrap design.mp4", title: "Product Wrap 3D Design Showcase Video" },
       { type: "image", src: "/images/pack.png", title: "Complete Packaging Box Kit" },
       { type: "image", src: "/images/jascolabs.jpg", title: "Jasco Labs Brand Identity" },
     ],
