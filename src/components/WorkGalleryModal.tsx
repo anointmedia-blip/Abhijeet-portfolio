@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
+import { createPortal } from "react-dom";
+import { ScrollSmoother } from "gsap/ScrollSmoother";
 import {
   MdClose,
   MdChevronLeft,
@@ -63,10 +65,17 @@ const WorkGalleryModal: React.FC<WorkGalleryModalProps> = ({
 
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    const smoother = ScrollSmoother.get();
+    if (smoother) {
+      smoother.paused(true);
+    }
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
       document.body.style.overflow = originalOverflow;
+      if (smoother) {
+        smoother.paused(false);
+      }
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [project, onClose]);
@@ -87,7 +96,7 @@ const WorkGalleryModal: React.FC<WorkGalleryModalProps> = ({
     setCurrentIndex((prev) => (prev + 1) % project.gallery.length);
   };
 
-  return (
+  return createPortal(
     <div
       className="gallery-backdrop"
       onClick={onClose}
@@ -263,7 +272,8 @@ const WorkGalleryModal: React.FC<WorkGalleryModalProps> = ({
           </div>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 
